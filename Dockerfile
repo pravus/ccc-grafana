@@ -18,12 +18,14 @@ FROM alpine:3
 
 RUN apk --no-cache update \
  && apk --no-cache upgrade \
- && apk --no-cache add ca-certificates
+ && apk --no-cache add ca-certificates libc6-compat
 
 COPY --from=builder /opt/grafana /opt/grafana
 
 WORKDIR /opt/grafana
 
-ENV PATH /opt/grafana:$PATH
+ENV PATH /opt/grafana/bin:$PATH
 
-ENTRYPOINT ["/opt/grafana/grafana"]
+COPY conf/defaults.ini /opt/grafana/conf/defaults.ini
+
+ENTRYPOINT ["/opt/grafana/bin/grafana-server"]
