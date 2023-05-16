@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[[ -n "${DOMAIN}" ]] \
+  && sed -E -i -e "s#^(domain = ).*#\1${DOMAIN}#" '/opt/grafana/conf/defaults.ini'
+[[ -n "${ROOT_URL}" ]] \
+  && sed -E -i -e "s#^(root_url = ).*#\1${ROOT_URL}#" '/opt/grafana/conf/defaults.ini'
+[[ -n "${SERVE_FROM_SUB_PATH}" ]] \
+  && sed -E -i -e "s#^(serve_from_sub_path = ).*#\1${SERVE_FROM_SUB_PATH}#" '/opt/grafana/conf/defaults.ini'
+
+exec /opt/grafana/bin/grafana-server

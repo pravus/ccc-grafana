@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/usr/bin/docker stop ccc-grafana
+/usr/bin/docker rm ccc-grafana
+exec /usr/bin/docker run "$@" \
+  --rm \
+  --name ccc-grafana \
+  --network www \
+  --publish 127.0.0.1:3000:3000 \
+  --volume /opt/ccc/var/grafana/grafana.db:/opt/grafana/data/grafana.db \
+  ccc-grafana:9.5.2
