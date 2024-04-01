@@ -1,7 +1,7 @@
 FROM alpine:3 AS builder
 
-ENV GRAFANA_VERSION 9.5.2
-ENV GRAFANA_SHA256 bd2c559e9ed17afa38c20b0ffffa6cb8024e7f8ca9fa9fab90f319060fa0ba0c
+ENV GRAFANA_VERSION 10.4.1
+ENV GRAFANA_SHA256 6e27177d8ebe84c4e45bd13134de8892d4b9d9771ee8833906a659ee35cfa76c
 
 RUN apk --no-cache update \
  && apk --no-cache upgrade \
@@ -13,7 +13,7 @@ WORKDIR /opt
 RUN curl -sSLO "https://dl.grafana.com/enterprise/release/grafana-enterprise-${GRAFANA_VERSION}.linux-amd64.tar.gz" \
  && echo "${GRAFANA_SHA256}  grafana-enterprise-${GRAFANA_VERSION}.linux-amd64.tar.gz" | sha256sum -cw - \
  && tar xzvf "grafana-enterprise-${GRAFANA_VERSION}.linux-amd64.tar.gz" \
- && mv "grafana-${GRAFANA_VERSION}" grafana
+ && mv "grafana-v${GRAFANA_VERSION}" grafana
 
 
 FROM alpine:3
