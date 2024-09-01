@@ -6,8 +6,9 @@ Requires=docker.service
 [Service]
 TimeoutStartSec=0
 Restart=always
-ExecStart=/opt/ccc/bin/ccc-grafana-start
-ExecStop=/opt/ccc/bin/ccc-grafana-stop
+ExecStartPre=-/opt/ccc/bin/ccc-pod -stop -f /opt/ccc/etc/grafana/ccc-pod.yaml
+ExecStart=/opt/ccc/bin/ccc-pod -start -bliss -f /opt/ccc/etc/grafana/ccc-pod.yaml
+ExecStop=/opt/ccc/bin/ccc-pod -stop -f /opt/ccc/etc/grafana/ccc-pod.yaml
 
 [Install]
 WantedBy=multi-user.target
